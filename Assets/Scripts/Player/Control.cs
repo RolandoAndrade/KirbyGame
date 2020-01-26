@@ -6,7 +6,7 @@ using UnityStandardAssets.CrossPlatformInput;
 public class Control : MonoBehaviour 
 {
 	public float walkSpeed = 1f;
-	public float runSpeed = 2f;
+	public float runSpeed = 5f;
 
 	private SpriteRenderer spriteRenderer;
 	private Rigidbody2D body;
@@ -29,24 +29,26 @@ public class Control : MonoBehaviour
 	{
 		this.horizontalMovement = CrossPlatformInputManager.GetAxis("Horizontal");
 		this.Flip ();
-		this.Walk ();
 	}
 
 	void Walk()
 	{
+		this.Move (this.body.velocity);
 		this.animator.SetFloat ("velocityX", Mathf.Abs(this.body.velocity.x));
 	}
 
-	void Run()
+	void Move(Vector2 movement)
 	{
-		
+		movement.x = this.horizontalMovement * (CrossPlatformInputManager.GetAxis("Run")>0.5?this.runSpeed:this.walkSpeed);
+		this.body.velocity = movement;
 	}
 
 	void FixedUpdate()
 	{
 		Vector2 movement = this.body.velocity; 
-		movement.x = this.horizontalMovement * this.walkSpeed;
-		this.body.velocity = movement;
+		this.Walk ();
+
+
 	}
 
 	void Flip()
