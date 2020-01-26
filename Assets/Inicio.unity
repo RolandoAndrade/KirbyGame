@@ -389,54 +389,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 212444384752847590, guid: 188a6b11cf19351458c75d3d03c8a780,
-        type: 2}
-      propertyPath: m_FlipX
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 188a6b11cf19351458c75d3d03c8a780, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &2083138936 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1343662540587496, guid: 188a6b11cf19351458c75d3d03c8a780,
-    type: 2}
-  m_PrefabInternal: {fileID: 1825762414}
 --- !u!4 &2083138939 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4882681456514882, guid: 188a6b11cf19351458c75d3d03c8a780,
     type: 2}
   m_PrefabInternal: {fileID: 1825762414}
---- !u!114 &2083138940
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2083138936}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7775c768a4335e148950f1993abf5dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  walkSpeed: 1
-  runSpeed: 5
---- !u!50 &2083138941
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2083138936}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
