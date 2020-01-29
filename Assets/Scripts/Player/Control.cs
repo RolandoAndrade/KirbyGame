@@ -7,15 +7,20 @@ public class Control : MonoBehaviour
 {
 	public float walkSpeed = 1f;
 	public float runSpeed = 5f;
+	public float jumpForce = 10f;
+	public LayerMask floorMask;
 
 	private SpriteRenderer spriteRenderer;
 	private Rigidbody2D body;
+	public Transform detector;
 
 	private bool isFlipped = false;
-	private bool isGrounded = false;
+	public bool isGrounded = false;
 	private float horizontalMovement = 0f;
 	private float verticalMovement = 0f;
 	private Animator animator;
+
+
 	// Use this for initialization
 	void Start () 
 	{
@@ -28,6 +33,7 @@ public class Control : MonoBehaviour
 	void Update () 
 	{
 		this.horizontalMovement = CrossPlatformInputManager.GetAxis("Horizontal");
+		this.verticalMovement = CrossPlatformInputManager.GetAxis("Vertical");
 		this.Flip ();
 	}
 
@@ -45,10 +51,22 @@ public class Control : MonoBehaviour
 
 	void FixedUpdate()
 	{
-		Vector2 movement = this.body.velocity; 
 		this.Walk ();
+		this.Jump ();
+	}
 
-
+	void Jump()
+	{
+		if (this.verticalMovement > 0) 
+		{
+			if (this.isGrounded) 
+			{
+				this.body.AddForce (new Vector2 (0, this.jumpForce));
+			}
+		}
+		this.animator.SetFloat ("velocityY", this.body.velocity.y);
+		this.animator.SetBool ("isGrounded", this.isGrounded);
+		this.isGrounded = Physics2D.OverlapCircle (detector.position, 0.5f, floorMask);
 	}
 
 	void Flip()
