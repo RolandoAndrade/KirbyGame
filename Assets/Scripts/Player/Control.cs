@@ -15,7 +15,8 @@ public class Control : MonoBehaviour
 	public Transform detector;
 
 	private bool isFlipped = false;
-	public bool isGrounded = false;
+	private bool isGrounded = false;
+	private bool isDownded = false;
 	private float horizontalMovement = 0f;
 	private float verticalMovement = 0f;
 	private Animator animator;
@@ -57,15 +58,26 @@ public class Control : MonoBehaviour
 
 	void Jump()
 	{
-		if (this.verticalMovement > 0) 
+		if (this.verticalMovement > 0.1) 
 		{
+			this.isDownded = false;
 			if (this.isGrounded) 
 			{
 				this.body.AddForce (new Vector2 (0, this.jumpForce));
 			}
+		} 
+		else if (this.verticalMovement < -0.1) 
+		{
+			this.isDownded = true;
+		} 
+		else 
+		{
+			this.isDownded = false;
 		}
+
 		this.animator.SetFloat ("velocityY", this.body.velocity.y);
 		this.animator.SetBool ("isGrounded", this.isGrounded);
+		this.animator.SetBool ("isDownded", this.isDownded);
 		this.isGrounded = Physics2D.OverlapCircle (detector.position, 0.5f, floorMask);
 	}
 
