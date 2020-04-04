@@ -8,7 +8,10 @@ public class Control : MonoBehaviour
 	public float walkSpeed = 1f;
 	public float runSpeed = 5f;
 	public float jumpForce = 10f;
+	public float flyForce = 5f;
 	public LayerMask floorMask;
+	public float defaultGravityScale = 5f;
+	public float gravityFlying = 1f;
 
 	private SpriteRenderer spriteRenderer;
 	private Rigidbody2D body;
@@ -17,9 +20,14 @@ public class Control : MonoBehaviour
 	private bool isFlipped = false;
 	private bool isGrounded = false;
 	private bool isDownded = false;
+	private bool isFlying = false;
+	private bool isEating = false;
+	private bool isFull = false;
+
 	private float horizontalMovement = 0f;
 	private float verticalMovement = 0f;
 	private Animator animator;
+	private GameObject eatingParticles;
 
 
 	// Use this for initialization
@@ -28,6 +36,7 @@ public class Control : MonoBehaviour
 		this.spriteRenderer = this.GetComponent<SpriteRenderer> ();
 		this.body = this.GetComponent<Rigidbody2D> ();
 		this.animator = this.GetComponent<Animator> ();
+		this.eatingParticles = this.transform.Find("EatingParticles").gameObject;
 	}
 	
 	// Update is called once per frame
@@ -40,45 +49,102 @@ public class Control : MonoBehaviour
 
 	void Walk()
 	{
-		this.Move (this.body.velocity);
+		Vector2 v = this.body.velocity;
+		v.x = this.horizontalMovement * (CrossPlatformInputManager.GetAxis("Run")>0.5?this.runSpeed:this.walkSpeed);
+		this.body.velocity = v;
+	}
+
+	void HorizontalMovement()
+	{
+		if (!this.isDownded&&!this.isEating)
+		{
+			this.Walk ();
+		}
 		this.animator.SetFloat ("velocityX", Mathf.Abs(this.body.velocity.x));
 	}
 
-	void Move(Vector2 movement)
+	void VerticalMovement()
 	{
-		movement.x = this.horizontalMovement * (CrossPlatformInputManager.GetAxis("Run")>0.5?this.runSpeed:this.walkSpeed);
-		this.body.velocity = movement;
+		this.isDownded = false;
+		this.Jump ();
+		this.Fly ();
+		this.Land ();
+
+		this.animator.SetFloat ("velocityY", this.body.velocity.y);
+		this.animator.SetBool ("isGrounded", this.isGrounded);
+		this.animator.SetBool ("isFlying", this.isFlying);
+	}
+
+	void Actions()
+	{
+		this.Down ();
+		this.Absorb ();
+
+		this.animator.SetBool ("isEating", this.isEating);
+		this.animator.SetBool ("isDownded", this.isDownded);
 	}
 
 	void FixedUpdate()
 	{
-		this.Walk ();
-		this.Jump ();
+		this.HorizontalMovement ();
+		this.VerticalMovement ();
+		this.Actions ();
+	}
+
+	void Fly()
+	{
+		if (CrossPlatformInputManager.GetButtonDown ("Jump") && !this.isGrounded)
+		{
+			Vector2 v = this.body.velocity;
+			v.y = this.flyForce;
+			this.body.velocity = v;
+			this.isFlying = true;
+			this.body.gravityScale = this.gravityFlying;
+		}
+	}
+
+	void Down()
+	{
+		if (CrossPlatformInputManager.GetButton ("Down")) 
+		{
+			this.isDownded = true;
+			this.isFlying = false;
+			this.body.gravityScale = this.defaultGravityScale;
+		}
 	}
 
 	void Jump()
 	{
-		if (this.verticalMovement > 0.1) 
+		if (CrossPlatformInputManager.GetButtonDown ("Jump") && this.isGrounded && !this.isFlying) 
 		{
-			this.isDownded = false;
-			if (this.isGrounded) 
-			{
-				this.body.AddForce (new Vector2 (0, this.jumpForce));
-			}
-		} 
-		else if (this.verticalMovement < -0.1) 
+			Vector2 v = this.body.velocity;
+			v.y = this.jumpForce;
+			this.body.velocity = v;
+		}
+
+	}
+
+	void Land()
+	{
+		this.isGrounded = Physics2D.OverlapCircle (detector.position, 0.5f, floorMask);
+		if (this.isGrounded) 
 		{
-			this.isDownded = true;
+			this.body.gravityScale = this.defaultGravityScale;
+			this.isFlying = false;
+		}
+	}
+
+	void Absorb()
+	{
+		if (CrossPlatformInputManager.GetButton ("Absorb")&&!this.isFlying&&!this.isDownded&&!this.isFull) 
+		{
+			this.isEating = true;
 		} 
 		else 
 		{
-			this.isDownded = false;
+			this.isEating = false;
 		}
-
-		this.animator.SetFloat ("velocityY", this.body.velocity.y);
-		this.animator.SetBool ("isGrounded", this.isGrounded);
-		this.animator.SetBool ("isDownded", this.isDownded);
-		this.isGrounded = Physics2D.OverlapCircle (detector.position, 0.5f, floorMask);
+		this.eatingParticles.SetActive(this.isEating);
 	}
 
 	void Flip()
@@ -86,7 +152,25 @@ public class Control : MonoBehaviour
 		if (this.isFlipped && this.horizontalMovement > 0 || !this.isFlipped && this.horizontalMovement < 0) 
 		{
 			this.isFlipped = !this.isFlipped;
-			this.spriteRenderer.flipX = this.isFlipped;
+			this.transform.localScale=new Vector3(-this.transform.localScale.x, this.transform.localScale.y, this.transform.localScale.z);
 		}
+	}
+
+	public bool isAbsorbing()
+	{
+		return this.isEating;
+	}
+
+	public bool isCorrectEatingDirection(float x)
+	{
+		return this.transform.position.x > x == this.isFlipped;
+	}
+
+	public void Fill()
+	{
+		this.isFull = true;
+		this.isEating = false;
+		this.animator.SetBool ("isFull", this.isFull);
+		this.animator.SetBool ("isEating", this.isEating);
 	}
 }
