@@ -31,6 +31,7 @@ public class Control : MonoBehaviour
 
 	private PlayerAction jump = new Jump ();
 	private PlayerAction walk = new Walk ();
+	private PlayerAction down = new Down();
 
 
 	// Use this for initialization
@@ -50,19 +51,9 @@ public class Control : MonoBehaviour
 		this.Flip ();
 	}
 
-	void Walk()
-	{
-		Vector2 v = this.body.velocity;
-		v.x = this.horizontalMovement * (CrossPlatformInputManager.GetAxis("Run")>0.5?this.runSpeed:this.walkSpeed);
-		this.body.velocity = v;
-	}
-
 	void HorizontalMovement()
 	{
-		if (!this.isDownded&&!this.isEating)
-		{
-			this.Walk ();
-		}
+		walk.Execute (this);
 		this.animator.SetFloat ("velocityX", Mathf.Abs(this.body.velocity.x));
 	}
 
@@ -80,7 +71,7 @@ public class Control : MonoBehaviour
 
 	void Actions()
 	{
-		this.Down ();
+		down.Execute (this);
 		this.Absorb ();
 
 		this.animator.SetBool ("isEating", this.isEating);
@@ -114,17 +105,6 @@ public class Control : MonoBehaviour
 			this.isFlying = false;
 			this.body.gravityScale = this.defaultGravityScale;
 		}
-	}
-
-	void Jump()
-	{
-		if (CrossPlatformInputManager.GetButtonDown ("Jump") && this.isGrounded && !this.isFlying) 
-		{
-			Vector2 v = this.body.velocity;
-			v.y = this.jumpForce;
-			this.body.velocity = v;
-		}
-
 	}
 
 	void Land()
@@ -209,9 +189,33 @@ public class Control : MonoBehaviour
 		return this.horizontalMovement;
 	}
 
+	public void SetIsFlying(bool isFlying)
+	{
+		this.isFlying = isFlying;
+	}
 
+	public void SetIsGrounded(bool isGrounded)
+	{
+		this.isGrounded = isGrounded;
+	}
+
+	public void SetIsEating(bool isEating)
+	{
+		this.isEating = isEating;
+	}
+
+	public void SetIsDownded(bool isDownded)
+	{
+		this.isDownded = isDownded;
+	}
+		
 	public void SetVelocity(Vector2 velocity)
 	{
 		this.body.velocity = velocity;
+	}
+
+	public void SetGravityScale(float gravityScale)
+	{
+		this.body.gravityScale = gravityScale;
 	}
 }
