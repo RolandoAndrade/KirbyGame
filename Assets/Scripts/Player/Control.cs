@@ -32,6 +32,7 @@ public class Control : MonoBehaviour
 	private PlayerAction jump = new Jump ();
 	private PlayerAction walk = new Walk ();
 	private PlayerAction down = new Down();
+	private PlayerAction fly = new Fly ();
 
 
 	// Use this for initialization
@@ -61,7 +62,7 @@ public class Control : MonoBehaviour
 	{
 		this.isDownded = false;
 		jump.Execute (this);
-		this.Fly ();
+		fly.Execute (this);
 		this.Land ();
 
 		this.animator.SetFloat ("velocityY", this.body.velocity.y);
@@ -96,17 +97,7 @@ public class Control : MonoBehaviour
 			this.body.gravityScale = this.gravityFlying;
 		}
 	}
-
-	void Down()
-	{
-		if (CrossPlatformInputManager.GetButton ("Down")) 
-		{
-			this.isDownded = true;
-			this.isFlying = false;
-			this.body.gravityScale = this.defaultGravityScale;
-		}
-	}
-
+		
 	void Land()
 	{
 		this.isGrounded = Physics2D.OverlapCircle (detector.position, 0.5f, floorMask);
