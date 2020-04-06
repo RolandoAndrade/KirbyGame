@@ -29,6 +29,9 @@ public class Control : MonoBehaviour
 	private Animator animator;
 	private GameObject eatingParticles;
 
+	private PlayerAction jump = new Jump ();
+	private PlayerAction walk = new Walk ();
+
 
 	// Use this for initialization
 	void Start () 
@@ -66,7 +69,7 @@ public class Control : MonoBehaviour
 	void VerticalMovement()
 	{
 		this.isDownded = false;
-		this.Jump ();
+		jump.Execute (this);
 		this.Fly ();
 		this.Land ();
 
@@ -172,5 +175,43 @@ public class Control : MonoBehaviour
 		this.isEating = false;
 		this.animator.SetBool ("isFull", this.isFull);
 		this.animator.SetBool ("isEating", this.isEating);
+	}
+
+	//REFACTORING
+
+	public bool IsFlying()
+	{
+		return this.isFlying;
+	}
+
+	public bool IsGrounded()
+	{
+		return this.isGrounded;
+	}
+
+	public bool IsEating()
+	{
+		return this.isEating;
+	}
+
+	public bool IsDownded()
+	{
+		return this.isDownded;
+	}
+
+	public Vector2 GetVelocity()
+	{
+		return this.body.velocity;
+	}
+
+	public float GetHorizontalMovement()
+	{
+		return this.horizontalMovement;
+	}
+
+
+	public void SetVelocity(Vector2 velocity)
+	{
+		this.body.velocity = velocity;
 	}
 }
