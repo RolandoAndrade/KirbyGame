@@ -12,10 +12,10 @@ public class Control : MonoBehaviour
 	public LayerMask floorMask;
 	public float defaultGravityScale = 5f;
 	public float gravityFlying = 1f;
+	public Transform detector;
 
 	private SpriteRenderer spriteRenderer;
 	private Rigidbody2D body;
-	public Transform detector;
 
 	private bool isFlipped = false;
 	private bool isGrounded = false;
@@ -109,11 +109,6 @@ public class Control : MonoBehaviour
 			this.isFlipped = !this.isFlipped;
 			this.transform.localScale=new Vector3(-this.transform.localScale.x, this.transform.localScale.y, this.transform.localScale.z);
 		}
-	}
-
-	public bool isAbsorbing()
-	{
-		return this.isEating;
 	}
 
 	public bool isCorrectEatingDirection(float x)

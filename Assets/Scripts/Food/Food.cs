@@ -37,7 +37,7 @@ public class Food : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
-		if (this.isPlayerInEatingZone && this.playerControl.isAbsorbing () && this.playerControl.isCorrectEatingDirection(this.transform.position.x)) 
+		if (this.isPlayerInEatingZone && this.playerControl.IsEating () && this.playerControl.isCorrectEatingDirection(this.transform.position.x)) 
 		{
 			this.HorizontalMovement ();
 		}
