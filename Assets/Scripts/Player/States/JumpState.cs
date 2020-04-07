@@ -1,17 +1,16 @@
-﻿public class NormalState : PlayerState 
+﻿public class JumpState:PlayerState
 {
-	private PlayerAction jump = new Jump ();
+	private PlayerAction fly= new Fly ();
 	private PlayerAction walk = new Walk ();
 	private PlayerAction down = new Down();
 
-	public NormalState(Control player):base(player)
+	public JumpState (Control player):base(player)
 	{
-		
 	}
 
 	public override void SetInitialState()
 	{
-		this.SetIsGrounded (true);
+		this.SetIsGrounded (false);
 		this.SetIsDownded (false);
 		this.SetIsFlying (false);
 		this.SetIsEating (false);
@@ -20,16 +19,9 @@
 
 	public override PlayerState ExecuteStateActions()
 	{
+		fly.Execute (GetPlayer());
 		walk.Execute (GetPlayer());
-		if (jump.Execute (GetPlayer ()))
-		{
-			return new JumpState (GetPlayer());
-		} 
-		else if (down.Execute (GetPlayer ())) 
-		{
-			return new DownState (GetPlayer());
-		}
-		this.SetAnimations ();
+		down.Execute (GetPlayer());
 		return this;
 	}
 
@@ -38,3 +30,4 @@
 		this.GetPlayer ().SetBoolAnimation ("isDownded", false);
 	}
 }
+

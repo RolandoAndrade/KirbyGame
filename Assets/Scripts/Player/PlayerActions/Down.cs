@@ -7,8 +7,6 @@ public class Down : PlayerAction
 	{
 		if (CrossPlatformInputManager.GetButton ("Down")) 
 		{
-			player.SetIsDownded (true);
-			player.SetIsFlying(false);
 			player.SetGravityScale(player.defaultGravityScale);
 			return true;
 		}

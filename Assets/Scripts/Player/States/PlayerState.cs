@@ -20,6 +20,8 @@ public abstract class PlayerState
 
 	public abstract PlayerState ExecuteStateActions();
 
+	public abstract void SetAnimations();
+
 	public Control GetPlayer()
 	{
 		return this.player;

@@ -5,7 +5,7 @@ public class Jump : PlayerAction
 {
 	public bool Execute(Control player)
 	{
-		if (CrossPlatformInputManager.GetButtonDown ("Jump") && player.IsGrounded() && !player.IsFlying()) 
+		if (CrossPlatformInputManager.GetButtonDown ("Jump")) 
 		{
 			Vector2 v = player.GetVelocity();
 			v.y = player.jumpForce;

@@ -47,6 +47,12 @@ public class Control : MonoBehaviour
 		this.eatingParticles = this.transform.Find("EatingParticles").gameObject;
 		this.state = new NormalState (this);
 	}
+
+
+	public void SetBoolAnimation(string name, bool active)
+	{
+		this.animator.SetBool (name, active);
+	}
 	
 	// Update is called once per frame
 	void Update () 
@@ -58,7 +64,7 @@ public class Control : MonoBehaviour
 
 	void HorizontalMovement()
 	{
-		state.ExecuteStateActions ();
+		this.state = state.ExecuteStateActions ();
 		this.animator.SetFloat ("velocityX", Mathf.Abs(this.body.velocity.x));
 	}
 
@@ -78,11 +84,11 @@ public class Control : MonoBehaviour
 
 	void Actions()
 	{
-		down.Execute (this);
+		//down.Execute (this);
 		this.Absorb ();
 
 		this.animator.SetBool ("isEating", this.isEating);
-		this.animator.SetBool ("isDownded", this.isDownded);
+		//this.animator.SetBool ("isDownded", this.isDownded);
 	}
 
 	void FixedUpdate()
