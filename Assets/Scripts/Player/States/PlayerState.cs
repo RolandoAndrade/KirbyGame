@@ -15,6 +15,8 @@ public abstract class PlayerState
 		this.player = player;
 	}
 
+	public abstract void SetInitialState();
+
 	public abstract PlayerState StateActions();
 
 	public Control GetPlayer()
@@ -60,5 +62,10 @@ public abstract class PlayerState
 	public void SetIsDownded(bool isDownded)
 	{
 		this.isDownded = isDownded;
+	}
+
+	public void SetIsFull(bool isFull)
+	{
+		this.isFull = isFull;
 	}
 }

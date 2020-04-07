@@ -7,7 +7,8 @@ public class Walk : PlayerAction
 	
 	public bool Execute(Control player)
 	{
-		if (!player.IsDownded()&&!player.IsEating())
+		PlayerState p = player.GetState ();
+		if (!p.IsDownded() && !p.IsEating())
 		{
 			if (CrossPlatformInputManager.GetAxis ("Run") > 0.5)
 			{

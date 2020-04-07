@@ -29,6 +29,8 @@ public class Control : MonoBehaviour
 	private Animator animator;
 	private GameObject eatingParticles;
 
+	private PlayerState state = new NormalState();
+
 	private PlayerAction jump = new Jump ();
 	private PlayerAction walk = new Walk ();
 	private PlayerAction down = new Down();
@@ -122,6 +124,11 @@ public class Control : MonoBehaviour
 		this.isEating = false;
 		this.animator.SetBool ("isFull", this.isFull);
 		this.animator.SetBool ("isEating", this.isEating);
+	}
+
+	public PlayerState GetState()
+	{
+		return this.state;
 	}
 
 	//REFACTORING
