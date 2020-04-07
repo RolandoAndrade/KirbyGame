@@ -29,7 +29,7 @@ public class Control : MonoBehaviour
 	private Animator animator;
 	private GameObject eatingParticles;
 
-	private PlayerState state = new NormalState();
+	private PlayerState state;
 
 	private PlayerAction jump = new Jump ();
 	private PlayerAction walk = new Walk ();
@@ -45,6 +45,7 @@ public class Control : MonoBehaviour
 		this.body = this.GetComponent<Rigidbody2D> ();
 		this.animator = this.GetComponent<Animator> ();
 		this.eatingParticles = this.transform.Find("EatingParticles").gameObject;
+		this.state = new NormalState (this);
 	}
 	
 	// Update is called once per frame
@@ -57,7 +58,7 @@ public class Control : MonoBehaviour
 
 	void HorizontalMovement()
 	{
-		walk.Execute (this);
+		state.ExecuteStateActions ();
 		this.animator.SetFloat ("velocityX", Mathf.Abs(this.body.velocity.x));
 	}
 

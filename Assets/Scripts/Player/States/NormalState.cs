@@ -8,7 +8,12 @@ public class NormalState : PlayerState
 	private PlayerAction walk = new Walk ();
 	private PlayerAction down = new Down();
 
-	public void SetInitialState()
+	public NormalState(Control player):base(player)
+	{
+		
+	}
+
+	public override void SetInitialState()
 	{
 		this.SetIsGrounded (true);
 		this.SetIsDownded (false);
@@ -17,7 +22,7 @@ public class NormalState : PlayerState
 		this.SetIsFull (false);
 	}
 
-	public PlayerState StateActions()
+	public override PlayerState ExecuteStateActions()
 	{
 		jump.Execute (GetPlayer());
 		walk.Execute (GetPlayer());
