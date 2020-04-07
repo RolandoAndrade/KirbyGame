@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-public class FlyingState : PlayerState 
+﻿public class FlyingState : PlayerState 
 {
 	private PlayerAction fly= new Fly ();
 	private PlayerAction walk = new Walk ();
@@ -22,7 +20,6 @@ public class FlyingState : PlayerState
 
 	public override PlayerState ExecuteStateActions()
 	{
-		Debug.Log ("Volar");
 		walk.Execute (GetPlayer());
 		fly.Execute (GetPlayer ());
 		if (down.Execute(GetPlayer())) 

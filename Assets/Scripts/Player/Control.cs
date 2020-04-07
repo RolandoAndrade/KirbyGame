@@ -78,11 +78,9 @@ public class Control : MonoBehaviour
 
 	void Actions()
 	{
-		//down.Execute (this);
 		this.Absorb ();
 
 		this.animator.SetBool ("isEating", this.isEating);
-		//this.animator.SetBool ("isDownded", this.isDownded);
 	}
 
 	void FixedUpdate()
