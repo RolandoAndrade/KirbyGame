@@ -5,12 +5,11 @@ public class Fly : PlayerAction
 {
 	public bool Execute(Control player)
 	{
-		if (CrossPlatformInputManager.GetButtonDown ("Jump") && !player.IsGrounded())
+		if (CrossPlatformInputManager.GetButtonDown ("Jump"))
 		{
 			Vector2 v = player.GetVelocity ();
 			v.y = player.flyForce;
 			player.SetVelocity(v);
-			player.SetIsFlying(true);
 			player.SetGravityScale(player.gravityFlying);
 			return true;
 		}

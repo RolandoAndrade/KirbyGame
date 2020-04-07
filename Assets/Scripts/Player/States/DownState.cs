@@ -28,6 +28,7 @@
 	public override void SetAnimations()
 	{
 		this.GetPlayer ().SetBoolAnimation ("isDownded", true);
+		this.GetPlayer ().SetBoolAnimation ("isFlying", false);
 	}
 }
 

@@ -1,4 +1,6 @@
-﻿public class NormalState : PlayerState 
+﻿using UnityEngine;
+
+public class NormalState : PlayerState 
 {
 	private PlayerAction jump = new Jump ();
 	private PlayerAction walk = new Walk ();
@@ -36,5 +38,6 @@
 	public override void SetAnimations()
 	{
 		this.GetPlayer ().SetBoolAnimation ("isDownded", false);
+		this.GetPlayer ().SetBoolAnimation ("isFlying", false);
 	}
 }

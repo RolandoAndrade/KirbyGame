@@ -1,10 +1,13 @@
-﻿public class JumpState:PlayerState
+﻿using UnityEngine;
+
+public class FlyingState : PlayerState 
 {
 	private PlayerAction fly= new Fly ();
 	private PlayerAction walk = new Walk ();
+	private PlayerAction down = new Down();
 	private PlayerAction land = new Land ();
 
-	public JumpState (Control player):base(player)
+	public FlyingState (Control player):base(player)
 	{
 	}
 
@@ -12,17 +15,19 @@
 	{
 		this.SetIsGrounded (false);
 		this.SetIsDownded (false);
-		this.SetIsFlying (false);
+		this.SetIsFlying (true);
 		this.SetIsEating (false);
 		this.SetIsFull (false);
 	}
 
 	public override PlayerState ExecuteStateActions()
 	{
+		Debug.Log ("Volar");
 		walk.Execute (GetPlayer());
-		if (fly.Execute (GetPlayer ())) 
+		fly.Execute (GetPlayer ());
+		if (down.Execute(GetPlayer())) 
 		{
-			return new FlyingState (GetPlayer ());
+			return new JumpState (GetPlayer());
 		}
 		else if(land.Execute(GetPlayer()))
 		{
@@ -35,7 +40,6 @@
 	public override void SetAnimations()
 	{
 		this.GetPlayer ().SetBoolAnimation ("isDownded", false);
-		this.GetPlayer ().SetBoolAnimation ("isFlying", false);
+		this.GetPlayer ().SetBoolAnimation ("isFlying", true);
 	}
 }
-

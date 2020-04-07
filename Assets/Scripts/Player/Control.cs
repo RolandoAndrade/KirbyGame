@@ -70,16 +70,10 @@ public class Control : MonoBehaviour
 
 	void VerticalMovement()
 	{
-		this.isGrounded = Physics2D.OverlapCircle (detector.position, 0.5f, floorMask);
+		
 		this.isDownded = false;
-
-		jump.Execute (this);
-		fly.Execute (this);
-		land.Execute (this);
-
 		this.animator.SetFloat ("velocityY", this.body.velocity.y);
 		this.animator.SetBool ("isGrounded", this.isGrounded);
-		this.animator.SetBool ("isFlying", this.isFlying);
 	}
 
 	void Actions()
@@ -93,6 +87,7 @@ public class Control : MonoBehaviour
 
 	void FixedUpdate()
 	{
+		this.isGrounded = Physics2D.OverlapCircle (detector.position, 0.15f, floorMask);
 		this.HorizontalMovement ();
 		this.VerticalMovement ();
 		this.Actions ();
