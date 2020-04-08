@@ -13,10 +13,8 @@ public abstract class PlayerState
 	public PlayerState(Control player)
 	{
 		this.player = player;
-		this.SetInitialState ();
 	}
 
-	public abstract void SetInitialState();
 
 	public abstract PlayerState ExecuteStateActions();
 

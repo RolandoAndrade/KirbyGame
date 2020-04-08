@@ -5,16 +5,7 @@
 	public DownState (Control player):base(player)
 	{
 	}
-
-	public override void SetInitialState()
-	{
-		this.SetIsGrounded (false);
-		this.SetIsDownded (true);
-		this.SetIsFlying (false);
-		this.SetIsEating (false);
-		this.SetIsFull (false);
-	}
-
+		
 	public override PlayerState ExecuteStateActions()
 	{
 		if (!down.Execute (GetPlayer ())) 

@@ -9,15 +9,6 @@
 	{
 	}
 
-	public override void SetInitialState()
-	{
-		this.SetIsGrounded (false);
-		this.SetIsDownded (false);
-		this.SetIsFlying (true);
-		this.SetIsEating (false);
-		this.SetIsFull (false);
-	}
-
 	public override PlayerState ExecuteStateActions()
 	{
 		walk.Execute (GetPlayer());

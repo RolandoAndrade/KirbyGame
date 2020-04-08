@@ -11,14 +11,6 @@ public class NormalState : PlayerState
 		
 	}
 
-	public override void SetInitialState()
-	{
-		this.SetIsGrounded (true);
-		this.SetIsDownded (false);
-		this.SetIsFlying (false);
-		this.SetIsEating (false);
-		this.SetIsFull (false);
-	}
 
 	public override PlayerState ExecuteStateActions()
 	{
