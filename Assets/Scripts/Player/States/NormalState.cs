@@ -5,6 +5,7 @@ public class NormalState : PlayerState
 	private PlayerAction jump = new Jump ();
 	private PlayerAction walk = new Walk ();
 	private PlayerAction down = new Down();
+	private PlayerAction eat = new Eat();
 
 	public NormalState(Control player):base(player)
 	{
@@ -22,6 +23,10 @@ public class NormalState : PlayerState
 		else if (down.Execute (GetPlayer ())) 
 		{
 			return new DownState (GetPlayer());
+		}
+		else if(eat.Execute(GetPlayer()))
+		{
+			return new EatingState (GetPlayer());
 		}
 		this.SetAnimations ();
 		return this;

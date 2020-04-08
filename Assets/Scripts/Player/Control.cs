@@ -14,6 +14,8 @@ public class Control : MonoBehaviour
 	public float gravityFlying = 1f;
 	public Transform detector;
 
+	public static string EATING_PARTICLES_NAME = "EatingParticles";
+
 	private SpriteRenderer spriteRenderer;
 	private Rigidbody2D body;
 
@@ -46,6 +48,7 @@ public class Control : MonoBehaviour
 		this.animator = this.GetComponent<Animator> ();
 		this.eatingParticles = this.transform.Find("EatingParticles").gameObject;
 		this.state = new NormalState (this);
+		this.SetEatingAnimation (false);
 	}
 
 
@@ -78,9 +81,7 @@ public class Control : MonoBehaviour
 
 	void Actions()
 	{
-		this.Absorb ();
 
-		this.animator.SetBool ("isEating", this.isEating);
 	}
 
 	void FixedUpdate()
@@ -91,17 +92,10 @@ public class Control : MonoBehaviour
 		this.Actions ();
 	}
 
-	void Absorb()
+	public void SetEatingAnimation(bool isEating)
 	{
-		if (CrossPlatformInputManager.GetButton ("Absorb")&&!this.isFlying&&!this.isDownded&&!this.isFull) 
-		{
-			this.isEating = true;
-		} 
-		else 
-		{
-			this.isEating = false;
-		}
-		this.eatingParticles.SetActive(this.isEating);
+		this.SetBoolAnimation ("isEating", isEating);
+		this.eatingParticles.SetActive(isEating);
 	}
 
 	void Flip()
@@ -123,7 +117,6 @@ public class Control : MonoBehaviour
 		this.isFull = true;
 		this.isEating = false;
 		this.animator.SetBool ("isFull", this.isFull);
-		this.animator.SetBool ("isEating", this.isEating);
 	}
 
 	public PlayerState GetState()

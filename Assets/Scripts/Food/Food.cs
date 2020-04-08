@@ -2,14 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Food : MonoBehaviour {
+public class Food : MonoBehaviour 
+{
 
 	public GameObject player;
 	public float eatingSpeed = 5f;
 
 	private Control playerControl;
-	private bool isPlayerInEatingZone = false;
 	private const float SPEED_DIVIDER = 10f;
+
+	private bool isMoving = false;
+
 	// Use this for initialization
 	void Start () 
 	{
@@ -18,26 +21,41 @@ public class Food : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D collider)
 	{
-		this.isPlayerInEatingZone = true;
+		if (collider.name == Control.EATING_PARTICLES_NAME) 
+		{
+			this.isMoving = true;
+		} 
+		else 
+		{
+			this.playerControl.Fill ();
+			Destroy (this.gameObject);
+		}
 	}
 
 	void OnTriggerExit2D(Collider2D collider)
 	{
-		this.isPlayerInEatingZone = false;
+		if (collider.name == Control.EATING_PARTICLES_NAME) 
+		{
+			this.isMoving = false;
+		}
 	}
 
 	void HorizontalMovement()
 	{
-		int factor = this.transform.position.x > player.transform.position.x ? -1:1;
-		Vector3 t = this.transform.position;
-		t.x +=  this.eatingSpeed/SPEED_DIVIDER * factor;
-		this.transform.position = t; 
+		float distance = player.transform.position.x - this.transform.position.x;
+		if (distance != 0) 
+		{
+			float factor = 1/distance;
+			Vector3 t = this.transform.position;
+			t.x +=  this.eatingSpeed/SPEED_DIVIDER * factor;
+			this.transform.position = t;
+		}
 	}
 	
 	// Update is called once per frame
 	void Update () 
 	{
-		if (this.isPlayerInEatingZone && this.playerControl.IsEating () && this.playerControl.isCorrectEatingDirection(this.transform.position.x)) 
+		if (this.isMoving) 
 		{
 			this.HorizontalMovement ();
 		}
