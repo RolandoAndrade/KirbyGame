@@ -30,19 +30,19 @@ public class Captions : MonoBehaviour
 	{
 		if (!this.isEnded)
 		{
-			if (this.fadeAction.IsFadeIn()) 
-			{
-				StartCoroutine (fadeAction.FadeTextToFullAlpha ());
-			}
-			if (Input.anyKeyDown) 
-			{
-				this.isLooped = false;
-				StartCoroutine (fadeAction.FadeTextToZeroAlpha());
-			}
 			if (this.fadeAction.IsFadeIn () && !this.isLooped) 
 			{
 				this.isLooped = true;
 				this.Next ();
+			}
+			else if (this.fadeAction.IsFadeIn()) 
+			{
+				StartCoroutine (fadeAction.FadeTextToFullAlpha ());
+			}
+			else if (Input.anyKeyDown) 
+			{
+				this.isLooped = false;
+				StartCoroutine (fadeAction.FadeTextToZeroAlpha());
 			}
 		}
 	}
