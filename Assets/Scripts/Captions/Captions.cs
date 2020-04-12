@@ -7,18 +7,20 @@ using UnityStandardAssets.CrossPlatformInput;
 public class Captions : MonoBehaviour 
 {
 	public List<string> captions = new List<string>();
-	public float time = 10f;
 
+	private FadeText fadeAction;
 	private TextMeshPro tmp;
 
-	private bool fadeIn = false;
+
 	private int index = 0;
+	private bool isLooped = false;
 	private bool isEnded = false;
 
 
 	void Start () 
 	{
 		tmp = this.GetComponent<TextMeshPro> ();
+		fadeAction = this.GetComponent<FadeText> ();
 		tmp.text = captions [0];
 
 	}
@@ -28,14 +30,19 @@ public class Captions : MonoBehaviour
 	{
 		if (!this.isEnded)
 		{
-			if (fadeIn) 
+			if (this.fadeAction.IsFadeIn()) 
 			{
-				StartCoroutine (FadeTextToFullAlpha ());
+				StartCoroutine (fadeAction.FadeTextToFullAlpha ());
 			}
 			if (Input.anyKeyDown) 
 			{
-
-				StartCoroutine (FadeTextToZeroAlpha());
+				this.isLooped = false;
+				StartCoroutine (fadeAction.FadeTextToZeroAlpha());
+			}
+			if (this.fadeAction.IsFadeIn () && !this.isLooped) 
+			{
+				this.isLooped = true;
+				this.Next ();
 			}
 		}
 	}
@@ -52,33 +59,7 @@ public class Captions : MonoBehaviour
 		}
 	}
 
-
-	public IEnumerator FadeTextToFullAlpha()
-	{
-		this.tmp.color = new Color (tmp.color.r,tmp.color.g,tmp.color.b,0);
-		while (tmp.color.a < 1.0f) 
-		{
-			tmp.color = new Color (tmp.color.r, tmp.color.g,
-				tmp.color.b, tmp.color.a + Time.deltaTime/time);
-			yield return null;
-		}
-		this.fadeIn = false;
-	}
-
-	public IEnumerator FadeTextToZeroAlpha()
-	{
-		this.tmp.color = new Color (tmp.color.r,tmp.color.g,tmp.color.b,1);
-		while (tmp.color.a > 0.0f) 
-		{
-			tmp.color = new Color (tmp.color.r, tmp.color.g,
-				tmp.color.b, tmp.color.a - Time.deltaTime/time);
-			yield return null;
-		}
-		this.fadeIn = true;
-		this.Next ();
-	}
-
-	public void IsEnded()
+	public bool IsEnded()
 	{
 		return this.isEnded;
 	}
