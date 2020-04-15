@@ -357,7 +357,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 64835278
+  randomSeed: 1656656704
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -3617,7 +3617,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22495902, guid: a6a60659abb4d9d4b934feebd3dcc952, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -1.8999999
+      value: -1.41
       objectReference: {fileID: 0}
     - target: {fileID: 22495902, guid: a6a60659abb4d9d4b934feebd3dcc952, type: 2}
       propertyPath: m_LocalRotation.x
@@ -3753,7 +3753,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: a6a60659abb4d9d4b934feebd3dcc952, type: 2}
       propertyPath: m_fontColor32.rgba
-      value: 7763574
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: a6a60659abb4d9d4b934feebd3dcc952, type: 2}
       propertyPath: m_Name
@@ -3765,15 +3765,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: a6a60659abb4d9d4b934feebd3dcc952, type: 2}
       propertyPath: m_fontColor.r
-      value: 0.46323532
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: a6a60659abb4d9d4b934feebd3dcc952, type: 2}
       propertyPath: m_fontColor.g
-      value: 0.46323532
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: a6a60659abb4d9d4b934feebd3dcc952, type: 2}
       propertyPath: m_fontColor.b
-      value: 0.46323532
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a6a60659abb4d9d4b934feebd3dcc952, type: 2}
@@ -3799,6 +3799,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   time: 10
+--- !u!1 &295017194 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1285456537707998, guid: 943529da0db27cd43808839d3c47bb6f,
+    type: 2}
+  m_PrefabInternal: {fileID: 729991077}
+--- !u!114 &295017202
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 295017194}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4975a6e437fc3b149a8cd508ce5bdd69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  threshold: 0.25
+  intensity: 1
+  blurSize: 3.5
+  blurIterations: 1
+  blurType: 0
+  fastBloomShader: {fileID: 4800000, guid: 68a00c837b82e4c6d92e7da765dc5f1d, type: 3}
 --- !u!1001 &729991077
 Prefab:
   m_ObjectHideFlags: 0
@@ -4012,7 +4034,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -386709626
+  randomSeed: -381829361
   InitialModule:
     serializedVersion: 3
     enabled: 1

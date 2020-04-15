@@ -44,7 +44,7 @@ public class ChapterText : MonoBehaviour {
 	public bool Show()
 	{
 		this.isShowed = true;
-		return this.isEnded;
+		return !this.isEnded;
 	}
 
 	public IEnumerator FadeToFullAlpha()
