@@ -8,3 +8,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Start.unity
     guid: 171c57373347e0249aac3a81a0e5dd3b
+  - enabled: 1
+    path: Assets/Inicio.unity
+    guid: 42437ef44b317ad4c861d641b98bf1a4

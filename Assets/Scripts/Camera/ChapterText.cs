@@ -10,6 +10,7 @@ public class ChapterText : MonoBehaviour {
 	private const float TIME = 1f;
 	private bool isShowed = false;
 	private bool isWhite = false;
+	private bool isEnded = false;
 
 	void Start () 
 	{
@@ -26,7 +27,11 @@ public class ChapterText : MonoBehaviour {
 			{
 				if (fadeAction.IsFadeIn ()) 
 				{
-					StartCoroutine (this.fadeAction.FadeTextToFullAlpha());
+					StartCoroutine (this.fadeAction.FadeTextToFullAlpha ());
+				} 
+				else 
+				{
+					this.isEnded = true;
 				}
 			}
 			else
@@ -36,9 +41,10 @@ public class ChapterText : MonoBehaviour {
 		}
 	}
 
-	public void Show()
+	public bool Show()
 	{
 		this.isShowed = true;
+		return this.isEnded;
 	}
 
 	public IEnumerator FadeToFullAlpha()

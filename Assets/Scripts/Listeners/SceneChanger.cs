@@ -1,8 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SceneChanger : MonoBehaviour {
+
+	public int nextLevel;
+
+	private const float SECONDS_TO_CHANGE_SCENE = 3f;
 
 	private ChapterText chapterScreen;
 
@@ -18,7 +23,17 @@ public class SceneChanger : MonoBehaviour {
 	{
 		if (listener.Listen ()) 
 		{
-			this.chapterScreen.Show ();
+			if (!this.chapterScreen.Show ())
+			{
+				StartCoroutine (this.ChangeScene ());
+			}
+
 		}
+	}
+
+	IEnumerator ChangeScene()
+	{
+		yield return new WaitForSeconds (SECONDS_TO_CHANGE_SCENE);
+		SceneManager.LoadScene (this.nextLevel);
 	}
 }
