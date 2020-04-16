@@ -3,6 +3,7 @@
 public abstract class PlayerState
 {
 	private Control player;
+	protected PlayerAction jump, walk, down, eat, fly, land, run;
 
 	public PlayerState(Control player)
 	{
@@ -23,5 +24,10 @@ public abstract class PlayerState
 	public Control GetPlayer()
 	{
 		return this.player;
+	}
+
+	public StateFactory GetStateFactory()
+	{
+		return this.player.GetStateFactory ();
 	}
 }

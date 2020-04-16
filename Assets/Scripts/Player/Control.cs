@@ -27,6 +27,8 @@ public class Control : MonoBehaviour
 
 	private PlayerState state;
 
+	private StateFactory stateFactory;
+
 	// Use this for initialization
 	void Start () 
 	{
@@ -34,6 +36,7 @@ public class Control : MonoBehaviour
 		this.animator = this.GetComponent<Animator> ();
 		this.eatingParticles = this.transform.Find("EatingParticles").gameObject;
 		this.state = new NormalState (this);
+		this.stateFactory = new BasicStateFactory (this);
 		this.SetEatingAnimation (false);
 	}
 
@@ -108,5 +111,10 @@ public class Control : MonoBehaviour
 	public bool IsGrounded()
 	{
 		return this.isGrounded;
+	}
+
+	public StateFactory GetStateFactory()
+	{
+		return this.stateFactory;
 	}
 }

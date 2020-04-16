@@ -15,9 +15,14 @@
 		return new DownState (player);
 	}
 
-	public PlayerState GetEatingState(Control player)
+	public PlayerState GetEatState(Control player)
 	{
 		return new EatingState (player);
+	}
+
+	public PlayerState GetLandState(Control player)
+	{
+		return new Land (player);
 	}
 
 	public PlayerState GetFlyingState(Control player)

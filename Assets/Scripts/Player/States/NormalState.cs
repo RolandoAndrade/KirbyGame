@@ -2,33 +2,27 @@
 
 public class NormalState : PlayerState 
 {
-	private PlayerAction jump = new Jump (GetPlayer());
-	private PlayerAction walk = new Walk (GetPlayer());
-	private PlayerAction down = new Down(GetPlayer());
-	private PlayerAction eat = new Eat(GetPlayer());
-
 	public NormalState(Control player):base(player)
 	{
-		
+
 	}
 
 
 	public override PlayerState ExecuteStateActions()
 	{
-		walk.Execute (GetPlayer());
-		if (jump.Execute (GetPlayer ()))
+		walk.Execute ();
+		if (jump.Execute ())
 		{
-			return new JumpState (GetPlayer());
+			return GetStateFactory().GetJumpState ();
 		} 
-		else if (down.Execute (GetPlayer ())) 
+		else if (down.Execute ()) 
 		{
-			return new DownState (GetPlayer());
+			return GetStateFactory().GetDownState();
 		}
-		else if(eat.Execute(GetPlayer()))
+		else if(eat.Execute())
 		{
-			return new EatingState (GetPlayer());
+			return GetStateFactory().GetEatState();
 		}
-		this.SetAnimations ();
 		return this;
 	}
 
