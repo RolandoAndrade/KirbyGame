@@ -1,6 +1,6 @@
 ﻿using System;
 
-public class BasicActionFactory
+public class BasicActionFactory: ActionsFactory
 {
 	public PlayerAction GetJump(Control player)
 	{
