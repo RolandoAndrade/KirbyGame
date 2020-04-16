@@ -3,21 +3,23 @@ using UnityStandardAssets.CrossPlatformInput;
 
 public class Walk : PlayerAction 
 {
-	private PlayerAction run = new Run();
+	private PlayerAction run = new Run(GetPlayer());
+
+	public Walk(Control player):base(player){}
 	
-	public bool Execute(Control player)
+	public override bool Execute()
 	{
 		if (CrossPlatformInputManager.GetAxis ("Horizontal")!=0) 
 		{
 			if (CrossPlatformInputManager.GetAxis ("Run") > 0.5)
 			{
-				run.Execute (player);
+				run.Execute ();
 			} 
 			else 
 			{
-				Vector2 v = player.GetVelocity();
-				v.x = player.GetHorizontalMovement() * player.walkSpeed;
-				player.SetVelocity(v);
+				Vector2 v = GetPlayer().GetVelocity();
+				v.x =  GetPlayer().GetHorizontalMovement() *  GetPlayer().walkSpeed;
+				GetPlayer().SetVelocity(v);
 			}
 			return true;
 		}

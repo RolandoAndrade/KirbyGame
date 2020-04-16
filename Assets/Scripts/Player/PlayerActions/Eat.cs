@@ -3,7 +3,9 @@ using UnityStandardAssets.CrossPlatformInput;
 
 public class Eat : PlayerAction 
 {
-	public bool Execute(Control player)
+	public Eat(Control player):base(player){}
+
+	public override bool Execute()
 	{
 		if (CrossPlatformInputManager.GetButton ("Absorb")) 
 		{

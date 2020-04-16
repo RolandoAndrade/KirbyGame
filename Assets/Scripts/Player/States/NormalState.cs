@@ -2,10 +2,10 @@
 
 public class NormalState : PlayerState 
 {
-	private PlayerAction jump = new Jump ();
-	private PlayerAction walk = new Walk ();
-	private PlayerAction down = new Down();
-	private PlayerAction eat = new Eat();
+	private PlayerAction jump = new Jump (GetPlayer());
+	private PlayerAction walk = new Walk (GetPlayer());
+	private PlayerAction down = new Down(GetPlayer());
+	private PlayerAction eat = new Eat(GetPlayer());
 
 	public NormalState(Control player):base(player)
 	{

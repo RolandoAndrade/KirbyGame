@@ -1,6 +1,6 @@
 ﻿public class EatingState:PlayerState
 {
-	private PlayerAction eat = new Eat();
+	private PlayerAction eat = new Eat(GetPlayer());
 
 	public EatingState (Control player):base(player)
 	{

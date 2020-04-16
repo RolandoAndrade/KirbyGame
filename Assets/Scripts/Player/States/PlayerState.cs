@@ -8,6 +8,13 @@ public abstract class PlayerState
 	{
 		this.player = player;
 	}
+
+	public PlayerState Execute()
+	{
+		PlayerState ps = this.ExecuteStateActions ();
+		this.SetAnimations ();
+		return ps;
+	}
 		
 	public abstract PlayerState ExecuteStateActions();
 

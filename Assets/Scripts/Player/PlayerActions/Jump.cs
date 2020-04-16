@@ -3,13 +3,15 @@ using UnityStandardAssets.CrossPlatformInput;
 
 public class Jump : PlayerAction 
 {
-	public bool Execute(Control player)
+	public Jump (Control player) : base (player){}
+
+	public override bool Execute()
 	{
 		if (CrossPlatformInputManager.GetButtonDown ("Jump")) 
 		{
-			Vector2 v = player.GetVelocity();
-			v.y = player.jumpForce;
-			player.SetVelocity(v);
+				Vector2 v = GetPlayer().GetVelocity();
+				v.y = GetPlayer().jumpForce;
+				GetPlayer().SetVelocity(v);
 			return true;
 		}
 		return false;

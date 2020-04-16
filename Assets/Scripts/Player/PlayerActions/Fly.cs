@@ -3,14 +3,16 @@ using UnityStandardAssets.CrossPlatformInput;
 
 public class Fly : PlayerAction 
 {
-	public bool Execute(Control player)
+	public Fly(Control player):base(player){}
+
+	public override bool Execute()
 	{
 		if (CrossPlatformInputManager.GetButtonDown ("Jump"))
 		{
-			Vector2 v = player.GetVelocity ();
-			v.y = player.flyForce;
-			player.SetVelocity(v);
-			player.SetGravityScale(player.gravityFlying);
+			Vector2 v = GetPlayer().GetVelocity ();
+			v.y = GetPlayer().flyForce;
+			GetPlayer().SetVelocity(v);
+			GetPlayer().SetGravityScale(GetPlayer().gravityFlying);
 			return true;
 		}
 		return false;

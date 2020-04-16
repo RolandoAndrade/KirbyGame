@@ -3,11 +3,13 @@ using UnityStandardAssets.CrossPlatformInput;
 
 public class Down : PlayerAction 
 {
-	public bool Execute(Control player)
+	public Down (Control player) : base (player){}
+
+	public override bool Execute()
 	{
 		if (CrossPlatformInputManager.GetButton ("Down")) 
 		{
-			player.SetGravityScale(player.defaultGravityScale);
+			GetPlayer().SetGravityScale(GetPlayer().defaultGravityScale);
 			return true;
 		}
 		return false;

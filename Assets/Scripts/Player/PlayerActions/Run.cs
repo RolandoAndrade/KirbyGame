@@ -3,11 +3,13 @@ using UnityStandardAssets.CrossPlatformInput;
 
 public class Run : PlayerAction 
 {
-	public bool Execute(Control player)
+	public Run (Control player) : base (player){}
+
+	public override bool Execute()
 	{
-		Vector2 v = player.GetVelocity();
-		v.x = player.GetHorizontalMovement() * player.runSpeed;
-		player.SetVelocity(v);
+		Vector2 v = GetPlayer().GetVelocity();
+		v.x = GetPlayer().GetHorizontalMovement() * GetPlayer().runSpeed;
+		GetPlayer().SetVelocity(v);
 		return true;
 	}
 }

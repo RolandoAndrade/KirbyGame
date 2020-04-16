@@ -1,10 +1,8 @@
 ﻿public class DownState:PlayerState
 {
-	private PlayerAction down = new Down();
+	private PlayerAction down = new Down(GetPlayer());
 
-	public DownState (Control player):base(player)
-	{
-	}
+	public DownState (Control player):base(player){}
 		
 	public override PlayerState ExecuteStateActions()
 	{

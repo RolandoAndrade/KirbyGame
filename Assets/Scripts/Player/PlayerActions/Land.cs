@@ -3,11 +3,13 @@ using UnityStandardAssets.CrossPlatformInput;
 
 public class Land : PlayerAction 
 {
-	public bool Execute(Control player)
+	public Land(Control player):base(player){}
+
+	public override bool Execute()
 	{
-		if (player.IsGrounded()) 
+		if (GetPlayer().IsGrounded()) 
 		{
-			player.SetGravityScale(player.defaultGravityScale);
+			GetPlayer().SetGravityScale(GetPlayer().defaultGravityScale);
 			return true;
 		}
 		return false;

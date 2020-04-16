@@ -1,9 +1,9 @@
 ﻿public class FlyingState : PlayerState 
 {
-	private PlayerAction fly= new Fly ();
-	private PlayerAction walk = new Walk ();
-	private PlayerAction down = new Down();
-	private PlayerAction land = new Land ();
+	private PlayerAction fly= new Fly (GetPlayer());
+	private PlayerAction walk = new Walk (GetPlayer());
+	private PlayerAction down = new Down(GetPlayer());
+	private PlayerAction land = new Land (GetPlayer());
 
 	public FlyingState (Control player):base(player)
 	{
