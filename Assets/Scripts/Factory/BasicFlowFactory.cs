@@ -1,4 +1,4 @@
-﻿public class BasicPlayerFactory:AbstractPlayerFactory
+﻿public class BasicFlowFactory:FlowFactory
 {
 	public ActionsFactory GetActionsFactory()
 	{

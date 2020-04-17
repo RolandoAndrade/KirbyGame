@@ -27,7 +27,6 @@ public class Control : MonoBehaviour
 
 	private PlayerState state;
 
-	private StateFactory stateFactory;
 
 	// Use this for initialization
 	void Start () 
@@ -35,8 +34,7 @@ public class Control : MonoBehaviour
 		this.body = this.GetComponent<Rigidbody2D> ();
 		this.animator = this.GetComponent<Animator> ();
 		this.eatingParticles = this.transform.Find("EatingParticles").gameObject;
-		this.state = new NormalState (this);
-		this.stateFactory = new BasicStateFactory (this);
+		this.state = new NormalState (this, new BasicFlowFactory());
 		this.SetEatingAnimation (false);
 	}
 
@@ -56,7 +54,7 @@ public class Control : MonoBehaviour
 	void FixedUpdate()
 	{
 		this.isGrounded = Physics2D.OverlapCircle (detector.position, 0.15f, floorMask);
-		this.state = state.ExecuteStateActions ();
+		this.state = state.Execute ();
 		this.animator.SetFloat ("velocityX", Mathf.Abs(this.body.velocity.x));
 		this.animator.SetFloat ("velocityY", this.body.velocity.y);
 		this.animator.SetBool ("isGrounded", this.isGrounded);
@@ -111,10 +109,5 @@ public class Control : MonoBehaviour
 	public bool IsGrounded()
 	{
 		return this.isGrounded;
-	}
-
-	public StateFactory GetStateFactory()
-	{
-		return this.stateFactory;
 	}
 }

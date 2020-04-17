@@ -2,12 +2,13 @@
 
 public abstract class PlayerState
 {
-	private Control player;
-	protected PlayerAction jump, walk, down, eat, fly, land, run;
+	protected Control player;
+	protected FlowFactory flowFactory;
 
 	public PlayerState(Control player)
 	{
 		this.player = player;
+		this.player = flowFactory;
 	}
 
 	public PlayerState Execute()
@@ -24,10 +25,5 @@ public abstract class PlayerState
 	public Control GetPlayer()
 	{
 		return this.player;
-	}
-
-	public StateFactory GetStateFactory()
-	{
-		return this.player.GetStateFactory ();
 	}
 }

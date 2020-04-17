@@ -1,4 +1,4 @@
-﻿public interface AbstractPlayerFactory
+﻿public interface FlowFactory
 {
 	ActionsFactory GetActionsFactory();
 	StateFactory GetStateFactory();

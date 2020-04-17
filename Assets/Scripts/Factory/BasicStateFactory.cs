@@ -1,32 +1,32 @@
 ﻿public class BasicStateFactory : StateFactory 
 {
-	public PlayerState GetNormalState(Control player)
+	public PlayerState GetNormalState(Control player, FlowFactory flowFactory)
 	{
-		return new NormalState (player);
+		return new NormalState (player, flowFactory);
 	}
 
-	public PlayerState GetJumpState(Control player)
+	public PlayerState GetJumpState(Control player, FlowFactory flowFactory)
 	{
-		return new JumpState (player);
+		return new JumpState (player, flowFactory);
 	}
 		
-	public PlayerState GetDownState(Control player)
+	public PlayerState GetDownState(Control player, FlowFactory flowFactory)
 	{
-		return new DownState (player);
+		return new DownState (player, flowFactory);
 	}
 
-	public PlayerState GetEatState(Control player)
+	public PlayerState GetEatState(Control player, FlowFactory flowFactory)
 	{
-		return new EatingState (player);
+		return new EatingState (player, flowFactory);
 	}
 
-	public PlayerState GetLandState(Control player)
+	public PlayerState GetLandState(Control player, FlowFactory flowFactory)
 	{
-		return new Land (player);
+		return new Land (player, flowFactory);
 	}
 
-	public PlayerState GetFlyingState(Control player)
+	public PlayerState GetFlyingState(Control player, FlowFactory flowFactory)
 	{
-		return new FlyingState (player);
+		return new FlyingState (player, flowFactory);
 	}
 }
