@@ -2,7 +2,7 @@
 
 public class NormalState : PlayerState 
 {
-	public NormalState(Control player):base(player)
+	public NormalState(Control player, FlowFactory flowFactory):base(player, flowFactory)
 	{
 
 	}
@@ -10,25 +10,26 @@ public class NormalState : PlayerState
 
 	public override PlayerState ExecuteStateActions()
 	{
-		walk.Execute ();
-		if (jump.Execute ())
+		flowFactory.GetActionsFactory().GetWalk(player).Execute ();
+
+		if (flowFactory.GetActionsFactory().GetJump(player).Execute ())
 		{
-			return GetStateFactory().GetJumpState ();
+			return flowFactory.GetStateFactory().GetJumpState(player, flowFactory);
 		} 
-		else if (down.Execute ()) 
+		else if (flowFactory.GetActionsFactory().GetDown(player).Execute()) 
 		{
-			return GetStateFactory().GetDownState();
+			return flowFactory.GetStateFactory().GetDownState(player, flowFactory);
 		}
-		else if(eat.Execute())
+		else if(flowFactory.GetStateFactory().GetEatState(player).Execute())
 		{
-			return GetStateFactory().GetEatState();
+			return flowFactory.GetActionsFactory ().GetEat (player, flowFactory);
 		}
 		return this;
 	}
 
 	public override void SetAnimations()
 	{
-		this.GetPlayer ().SetBoolAnimation ("isDownded", false);
-		this.GetPlayer ().SetBoolAnimation ("isFlying", false);
+		player.SetBoolAnimation ("isDownded", false);
+		player.SetBoolAnimation ("isFlying", false);
 	}
 }

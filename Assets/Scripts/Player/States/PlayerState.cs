@@ -5,10 +5,10 @@ public abstract class PlayerState
 	protected Control player;
 	protected FlowFactory flowFactory;
 
-	public PlayerState(Control player)
+	public PlayerState(Control player, FlowFactory flowFactory)
 	{
 		this.player = player;
-		this.player = flowFactory;
+		this.flowFactory = flowFactory;
 	}
 
 	public PlayerState Execute()
@@ -21,9 +21,4 @@ public abstract class PlayerState
 	public abstract PlayerState ExecuteStateActions();
 
 	public abstract void SetAnimations();
-
-	public Control GetPlayer()
-	{
-		return this.player;
-	}
 }
