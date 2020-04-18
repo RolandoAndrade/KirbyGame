@@ -1,32 +1,25 @@
 ﻿public class JumpState:PlayerState
 {
-	private PlayerAction fly= new Fly ();
-	private PlayerAction walk = new Walk ();
-	private PlayerAction land = new Land ();
-
-	public JumpState (Control player):base(player)
-	{
-	}
+	public JumpState (Control player, FlowFactory flowFactory):base(player, flowFactory){}
 
 	public override PlayerState ExecuteStateActions()
 	{
-		walk.Execute (GetPlayer());
-		if (fly.Execute (GetPlayer ())) 
+		flowFactory.GetActionsFactory().GetWalk(player).Execute ();
+		if (flowFactory.GetActionsFactory().GetFly(player).Execute ()) 
 		{
-			return new FlyingState (GetPlayer ());
+			return flowFactory.GetStateFactory().GetFlyingState(player, flowFactory);
 		}
-		else if(land.Execute(GetPlayer()))
+		else if(flowFactory.GetActionsFactory().GetLand(player).Execute())
 		{
-			return new NormalState (GetPlayer ());
+			return flowFactory.GetStateFactory().GetNormalState(player, flowFactory);
 		}
-		this.SetAnimations ();
 		return this;
 	}
 
 	public override void SetAnimations()
 	{
-		this.GetPlayer ().SetBoolAnimation ("isDownded", false);
-		this.GetPlayer ().SetBoolAnimation ("isFlying", false);
+		player.SetBoolAnimation (StateConstant.IS_DOWNDED_ANIMATION, false);
+		player.SetBoolAnimation (StateConstant.IS_FLIYING_ANIMATION, false);
 	}
 }
 

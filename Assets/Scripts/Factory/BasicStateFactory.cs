@@ -20,11 +20,6 @@
 		return new EatingState (player, flowFactory);
 	}
 
-	public PlayerState GetLandState(Control player, FlowFactory flowFactory)
-	{
-		return new Land (player, flowFactory);
-	}
-
 	public PlayerState GetFlyingState(Control player, FlowFactory flowFactory)
 	{
 		return new FlyingState (player, flowFactory);

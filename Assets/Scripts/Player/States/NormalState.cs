@@ -10,7 +10,10 @@ public class NormalState : PlayerState
 
 	public override PlayerState ExecuteStateActions()
 	{
-		flowFactory.GetActionsFactory().GetWalk(player).Execute ();
+		if (flowFactory.GetActionsFactory ().GetWalk (player).Execute ()) 
+		{
+			flowFactory.GetActionsFactory ().GetRun (player).Execute ();
+		}
 
 		if (flowFactory.GetActionsFactory().GetJump(player).Execute ())
 		{
@@ -20,9 +23,9 @@ public class NormalState : PlayerState
 		{
 			return flowFactory.GetStateFactory().GetDownState(player, flowFactory);
 		}
-		else if(flowFactory.GetStateFactory().GetEatState(player).Execute())
+		else if(flowFactory.GetActionsFactory().GetEat(player).Execute())
 		{
-			return flowFactory.GetActionsFactory ().GetEat (player, flowFactory);
+			return flowFactory.GetStateFactory ().GetEatState (player, flowFactory);
 		}
 		return this;
 	}

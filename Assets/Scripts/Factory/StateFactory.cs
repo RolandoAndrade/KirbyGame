@@ -8,7 +8,5 @@
 
 	PlayerState GetEatState(Control player, FlowFactory flowFactory);
 
-	PlayerState GetLandState(Control player, FlowFactory flowFactory);
-
 	PlayerState GetFlyingState(Control player, FlowFactory flowFactory);
 }
