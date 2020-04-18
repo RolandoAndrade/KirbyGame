@@ -29,7 +29,7 @@ public class NormalState : PlayerState
 
 	public override void SetAnimations()
 	{
-		player.SetBoolAnimation ("isDownded", false);
-		player.SetBoolAnimation ("isFlying", false);
+		player.SetBoolAnimation (StateConstant.IS_DOWNDED_ANIMATION, false);
+		player.SetBoolAnimation (StateConstant.IS_FLIYING_ANIMATION, false);
 	}
 }

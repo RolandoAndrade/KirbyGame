@@ -1,23 +1,20 @@
 ﻿public class DownState:PlayerState
 {
-	private PlayerAction down = new Down(GetPlayer());
-
-	public DownState (Control player):base(player){}
+	public DownState (Control player, FlowFactory flowFactory):base(player, flowFactory){}
 		
 	public override PlayerState ExecuteStateActions()
 	{
-		if (!down.Execute (GetPlayer ())) 
+		if (!flowFactory.GetActionsFactory().GetDown(player).Execute ()) 
 		{
-			return new NormalState (GetPlayer()); 
+			return flowFactory.GetStateFactory().GetNormalState(player, flowFactory); 
 		}
-		this.SetAnimations ();
 		return this;
 	}
 
 	public override void SetAnimations()
 	{
-		this.GetPlayer ().SetBoolAnimation ("isDownded", true);
-		this.GetPlayer ().SetBoolAnimation ("isFlying", false);
+		player.SetBoolAnimation (StateConstant.IS_DOWNDED_ANIMATION, true);
+		player.SetBoolAnimation (StateConstant.IS_FLIYING_ANIMATION, false);
 	}
 }
 

@@ -1,24 +1,19 @@
 ﻿public class EatingState:PlayerState
 {
-	private PlayerAction eat = new Eat(GetPlayer());
-
-	public EatingState (Control player):base(player)
-	{
-	}
+	public EatingState (Control player, FlowFactory flowFactory):base(player, flowFactory){}
 
 	public override PlayerState ExecuteStateActions()
 	{
-		if (!eat.Execute (GetPlayer ())) 
+		if (!flowFactory.GetActionsFactory().GetEat(player).Execute ()) 
 		{
-			this.GetPlayer ().SetEatingAnimation (false);
-			return new NormalState (GetPlayer()); 
+			player.SetEatingAnimation (false);
+			return flowFactory.GetStateFactory ().GetNormalState (player, flowFactory);
 		}
-		this.SetAnimations ();
 		return this;
 	}
 
 	public override void SetAnimations()
 	{
-		this.GetPlayer ().SetEatingAnimation (true);
+		player.SetEatingAnimation (true);
 	}
 }
