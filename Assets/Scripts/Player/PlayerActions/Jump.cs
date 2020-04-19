@@ -9,9 +9,9 @@ public class Jump : PlayerAction
 	{
 		if (CrossPlatformInputManager.GetButtonDown ("Jump")) 
 		{
-				Vector2 v = GetPlayer().GetVelocity();
-				v.y = GetPlayer().jumpForce;
-				GetPlayer().SetVelocity(v);
+			Vector2 v = GetPlayer().GetVelocity();
+			v.y = GetPlayer().jumpForce;
+			GetPlayer().SetVelocity(v);
 			return true;
 		}
 		return false;

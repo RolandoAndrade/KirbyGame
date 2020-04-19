@@ -1,4 +1,6 @@
-﻿public class JumpState:PlayerState
+﻿using UnityEngine;
+
+public class JumpState:PlayerState
 {
 	public JumpState (Control player, FlowFactory flowFactory):base(player, flowFactory){}
 

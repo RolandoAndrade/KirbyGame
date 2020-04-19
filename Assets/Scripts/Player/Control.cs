@@ -47,17 +47,17 @@ public class Control : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
-		this.horizontalMovement = CrossPlatformInputManager.GetAxis("Horizontal");
 		this.Flip ();
 	}
 		
 	void FixedUpdate()
 	{
+		this.horizontalMovement = CrossPlatformInputManager.GetAxis("Horizontal");
 		this.isGrounded = Physics2D.OverlapCircle (detector.position, 0.15f, floorMask);
-		this.state = state.Execute ();
 		this.animator.SetFloat ("velocityX", Mathf.Abs(this.body.velocity.x));
 		this.animator.SetFloat ("velocityY", this.body.velocity.y);
 		this.animator.SetBool ("isGrounded", this.isGrounded);
+		this.state = state.Execute ();
 	}
 
 	public void SetEatingAnimation(bool isEating)
