@@ -14,7 +14,6 @@ public class NormalState : PlayerState
 		{
 			flowFactory.GetActionsFactory ().GetRun (player).Execute ();
 		}
-
 		if (flowFactory.GetActionsFactory().GetJump(player).Execute ())
 		{
 			return flowFactory.GetStateFactory().GetJumpState(player, flowFactory);
