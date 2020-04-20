@@ -14,7 +14,7 @@ public class Control : MonoBehaviour
 	public float gravityFlying = 1f;
 	public Transform detector;
 
-	public static string EATING_PARTICLES_NAME = "EatingParticles";
+	public const string EATING_PARTICLES_NAME = "EatingParticles";
 	private Rigidbody2D body;
 
 	private bool isFlipped = false;
@@ -25,7 +25,9 @@ public class Control : MonoBehaviour
 	private Animator animator;
 	private GameObject eatingParticles;
 
+
 	private PlayerState state;
+	private AudioSource soundsManager;
 
 
 	// Use this for initialization
@@ -33,9 +35,10 @@ public class Control : MonoBehaviour
 	{
 		this.body = this.GetComponent<Rigidbody2D> ();
 		this.animator = this.GetComponent<Animator> ();
-		this.eatingParticles = this.transform.Find("EatingParticles").gameObject;
+		this.eatingParticles = this.transform.Find(EATING_PARTICLES_NAME).gameObject;
 		this.state = new NormalState (this, new BasicFlowFactory());
 		this.SetEatingAnimation (false);
+		this.soundsManager = this.GetComponent<AudioSource> ();
 	}
 
 
@@ -53,7 +56,7 @@ public class Control : MonoBehaviour
 	void FixedUpdate()
 	{
 		this.horizontalMovement = CrossPlatformInputManager.GetAxis("Horizontal");
-		this.isGrounded = Physics2D.OverlapCircle (detector.position, 0.15f, floorMask);
+		this.isGrounded = Physics2D.OverlapCircle (detector.position, 0.3f, floorMask);
 		this.animator.SetFloat ("velocityX", Mathf.Abs(this.body.velocity.x));
 		this.animator.SetFloat ("velocityY", this.body.velocity.y);
 		this.animator.SetBool ("isGrounded", this.isGrounded);
@@ -75,10 +78,16 @@ public class Control : MonoBehaviour
 		}
 	}
 
+	public void Eat()
+	{
+		
+	}
+
 	public void Fill()
 	{
 		this.isFull = true;
 		this.animator.SetBool ("isFull", this.isFull);
+		this.Eat ();
 	}
 
 	public PlayerState GetState()
@@ -109,5 +118,11 @@ public class Control : MonoBehaviour
 	public bool IsGrounded()
 	{
 		return this.isGrounded;
+	}
+
+	public void PlaySound(string resourceName)
+	{
+		this.soundsManager.clip = (AudioClip)Resources.Load (resourceName);
+		this.soundsManager.Play ();
 	}
 }

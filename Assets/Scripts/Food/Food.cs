@@ -27,7 +27,7 @@ public class Food : MonoBehaviour
 		} 
 		else 
 		{
-			this.playerControl.Fill ();
+			this.playerControl.Eat ();
 			Destroy (this.gameObject);
 		}
 	}

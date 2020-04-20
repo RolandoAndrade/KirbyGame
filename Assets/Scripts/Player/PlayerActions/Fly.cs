@@ -13,6 +13,7 @@ public class Fly : PlayerAction
 			v.y = GetPlayer().flyForce;
 			GetPlayer().SetVelocity(v);
 			GetPlayer().SetGravityScale(GetPlayer().gravityFlying);
+			GetPlayer ().PlaySound ("fly");
 			return true;
 		}
 		return false;

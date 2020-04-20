@@ -12,6 +12,7 @@ public class Jump : PlayerAction
 			Vector2 v = GetPlayer().GetVelocity();
 			v.y = GetPlayer().jumpForce;
 			GetPlayer().SetVelocity(v);
+			GetPlayer ().PlaySound ("jump");
 			return true;
 		}
 		return false;
