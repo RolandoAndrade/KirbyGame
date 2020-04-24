@@ -2,7 +2,10 @@
 
 public class JumpState:PlayerState
 {
-	public JumpState (Control player, FlowFactory flowFactory):base(player, flowFactory){}
+	public JumpState (Control player, FlowFactory flowFactory):base(player, flowFactory)
+	{
+		player.PlaySound ("jump");
+	}
 
 	public override PlayerState ExecuteStateActions()
 	{

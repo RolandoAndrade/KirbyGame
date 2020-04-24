@@ -14,7 +14,6 @@
 		{
 			return flowFactory.GetStateFactory ().GetNormalState (player, flowFactory);
 		}
-		this.SetAnimations ();
 		return this;
 	}
 

@@ -15,6 +15,7 @@ public class Control : MonoBehaviour
 	public Transform detector;
 
 	public const string EATING_PARTICLES_NAME = "EatingParticles";
+	public const string DUST_NAME = "Dust";
 	private Rigidbody2D body;
 
 	private bool isFlipped = false;
@@ -24,7 +25,6 @@ public class Control : MonoBehaviour
 	private float horizontalMovement = 0f;
 	private Animator animator;
 	private GameObject eatingParticles;
-
 
 	private PlayerState state;
 	private AudioSource soundsManager;

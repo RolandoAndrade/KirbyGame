@@ -1,6 +1,9 @@
 ﻿public class DownState:PlayerState
 {
-	public DownState (Control player, FlowFactory flowFactory):base(player, flowFactory){}
+	public DownState (Control player, FlowFactory flowFactory):base(player, flowFactory)
+	{
+		player.PlaySound ("down");
+	}
 		
 	public override PlayerState ExecuteStateActions()
 	{
