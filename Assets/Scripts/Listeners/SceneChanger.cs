@@ -7,7 +7,7 @@ public class SceneChanger : MonoBehaviour {
 
 	public int nextLevel;
 
-	private const float SECONDS_TO_CHANGE_SCENE = 3f;
+	private const float SECONDS_TO_CHANGE_SCENE = 1f;
 
 	private ChapterText chapterScreen;
 

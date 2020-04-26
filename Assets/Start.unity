@@ -3442,7 +3442,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -1266829032
+  randomSeed: 1139545250
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -6845,7 +6845,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 667954115
+  randomSeed: 883687860
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -10031,6 +10031,41 @@ Prefab:
     - target: {fileID: 114459255498275448, guid: 956df3c5985187a4a935f677936e0a1a,
         type: 2}
       propertyPath: m_isInputParsingRequired
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114459255498275448, guid: 956df3c5985187a4a935f677936e0a1a,
+        type: 2}
+      propertyPath: m_text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114459255498275448, guid: 956df3c5985187a4a935f677936e0a1a,
+        type: 2}
+      propertyPath: m_textInfo.characterCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114459255498275448, guid: 956df3c5985187a4a935f677936e0a1a,
+        type: 2}
+      propertyPath: m_textInfo.spaceCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114459255498275448, guid: 956df3c5985187a4a935f677936e0a1a,
+        type: 2}
+      propertyPath: m_textInfo.wordCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114459255498275448, guid: 956df3c5985187a4a935f677936e0a1a,
+        type: 2}
+      propertyPath: m_textInfo.lineCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114459255498275448, guid: 956df3c5985187a4a935f677936e0a1a,
+        type: 2}
+      propertyPath: m_textInfo.pageCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114788261320299414, guid: 956df3c5985187a4a935f677936e0a1a,
+        type: 2}
+      propertyPath: nextLevel
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []

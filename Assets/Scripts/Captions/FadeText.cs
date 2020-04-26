@@ -50,4 +50,9 @@ public class FadeText : MonoBehaviour
 	{
 		return this.fadeIn;
 	}
+
+	public void SetFadeIn(bool fade)
+	{
+		this.fadeIn = fade;
+	}
 }
