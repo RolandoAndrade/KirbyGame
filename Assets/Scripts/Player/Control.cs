@@ -15,6 +15,7 @@ public class Control : MonoBehaviour
 	public Transform detector;
 
 	public const string EATING_PARTICLES_NAME = "EatingParticles";
+	public const string MOUNTH = "Mouth";
 	public const string DUST_NAME = "Dust";
 	private Rigidbody2D body;
 
@@ -25,7 +26,7 @@ public class Control : MonoBehaviour
 	private float horizontalMovement = 0f;
 	private Animator animator;
 	private GameObject eatingParticles;
-
+	private GameObject mounth;
 	private PlayerState state;
 	private AudioSource soundsManager;
 
@@ -36,6 +37,7 @@ public class Control : MonoBehaviour
 		this.body = this.GetComponent<Rigidbody2D> ();
 		this.animator = this.GetComponent<Animator> ();
 		this.eatingParticles = this.transform.Find(EATING_PARTICLES_NAME).gameObject;
+		this.mounth = this.transform.Find(MOUNTH).gameObject;
 		this.state = new NormalState (this, new BasicFlowFactory());
 		this.SetEatingAnimation (false);
 		this.soundsManager = this.GetComponent<AudioSource> ();
@@ -69,6 +71,7 @@ public class Control : MonoBehaviour
 	{
 		this.SetBoolAnimation ("isEating", isEating);
 		this.eatingParticles.SetActive(isEating);
+		this.mounth.SetActive(isEating);
 	}
 
 	void Flip()
@@ -82,7 +85,7 @@ public class Control : MonoBehaviour
 
 	public void Eat()
 	{
-		
+		this.state = new NormalState (this, new BasicFlowFactory());
 	}
 
 	public void Fill()

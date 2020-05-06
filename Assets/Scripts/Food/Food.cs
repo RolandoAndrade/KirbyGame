@@ -25,7 +25,7 @@ public class Food : MonoBehaviour
 		{
 			this.isMoving = true;
 		} 
-		else 
+		else if(collider.name == "Mouth")
 		{
 			this.playerControl.Eat ();
 			Destroy (this.gameObject);
